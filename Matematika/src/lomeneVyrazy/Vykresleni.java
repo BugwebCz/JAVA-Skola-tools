@@ -8,6 +8,9 @@ import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.BasicStroke;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -55,17 +58,25 @@ public class Vykresleni extends AnnotatedFrame {
 	////////////////////////////////////////////////////
 	
 	@OnClick("btnVykreslit")
-	public void vypocitat() {
+	public void vypocitat() throws ScriptException {
 		String Vyraz = fldVyraz.getText();
-		/*String priklad = Vyraz.substring(Vyraz.indexOf("=", 0) + 1, Vyraz.length() + 1);
-		x1 = 0 + 450;
-		y1 = Float.valueOf(priklad.replaceAll("x", "0")) + 190;
-		x2 = 1 + 450;
-		y2 = Float.valueOf(priklad.replaceAll("x", "1")) + 190;*/
+		String priklad = Vyraz.substring(Vyraz.indexOf("=", 0) + 1, Vyraz.length() + 1);
+		
+		ScriptEngineManager mgr = new ScriptEngineManager();
+		ScriptEngine engine = mgr.getEngineByName("JavaScript");
+		    
+		Object y11 = engine.eval(priklad.replaceAll("x", "10"));
+		y1 = (float) y11;
+		    
+		Object y22 = engine.eval(priklad.replaceAll("x", "-10"));
+		y2 = (float) y22;
+		   
+		/*x1 = 10;
+		x2 = -10;
 		x1 = 40 + 450;
 		x2 = 45 + 450;
 		y1 = 30 + 190;
-		y2 = 45 + 190;
+		y2 = 45 + 190;*/
 	}
 /*
 	public void vykreslit(Graphics g) {
