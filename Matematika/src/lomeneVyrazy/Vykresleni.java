@@ -71,9 +71,10 @@ public class Vykresleni extends AnnotatedFrame {
 		Object y22 = engine.eval(priklad.replaceAll("x", "-10"));
 		y2 = (float) y22;
 		   
-		/*x1 = 10;
+		x1 = 10;
 		x2 = -10;
-		x1 = 40 + 450;
+		
+		/*x1 = 40 + 450;
 		x2 = 45 + 450;
 		y1 = 30 + 190;
 		y2 = 45 + 190;*/
