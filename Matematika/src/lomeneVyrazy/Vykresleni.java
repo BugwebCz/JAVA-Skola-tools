@@ -26,7 +26,7 @@ public class Vykresleni extends AnnotatedFrame {
 	public Double y1;
 	public Double x2;
 	public Double y2;
-	
+	public String priklad;
 	public float x0;
 	public float y0;
 	
@@ -65,7 +65,7 @@ public class Vykresleni extends AnnotatedFrame {
 	public void vypocitat() throws ScriptException {
 		
 		String Vyraz = fldVyraz.getText();
-		String priklad = "var " + Vyraz + " + 0.0";
+		priklad = "var " + Vyraz.replaceAll("x", "(var x)") + " + 0.0";
 		
 		ScriptEngineManager manager = new ScriptEngineManager();
 		ScriptEngine engine = manager.getEngineByName("JavaScript");
@@ -80,7 +80,29 @@ public class Vykresleni extends AnnotatedFrame {
 		manager.put("x", (-7.0));
 		engine.eval(priklad);
 		y2 = (Double) engine.get("y");
-		
+		//odsud oštření boundaries - spočítání x pro y na okraji a nahrazení -> nahradí se ale vždy!
+		if (y1 < (-7.0)) { 
+          	manager.put("y", (-7.0));
+    		engine.eval(priklad);
+    		x1 = (Double) engine.get("x");
+    		y1 = (-7.0);
+    	} else if (y1 > 7.0) {
+    		manager.put("y", 7.0);
+    		engine.eval(priklad);
+    		x1 = (Double) engine.get("x");
+    		y1 = 7.0;
+    	}
+    	if (y2 < (-7.0)) { 
+          	manager.put("y", (-7.0));
+    		engine.eval(priklad);
+    		x2 = (Double) engine.get("x");
+    		y2 = (-7.0);
+    	} else if (y2 > 7.0) {
+    		manager.put("y", 7.0);
+    		engine.eval(priklad);
+    		x2 = (Double) engine.get("x");
+    		y2 = 7.0;
+    	}
 		
 		repaint();
 	}
@@ -105,9 +127,6 @@ public class Vykresleni extends AnnotatedFrame {
 	        stetec.drawLine(450, 50, 450, 330);
 	        stetec.drawLine(310, 190, 590, 190);
 	        
-	        if (y1 > 330) { //když y1 > hranice dolního y -> spočítame x v tomto bodě a nahradíme x a y, dále standartně, to samé pro y2)
-	        	
-	        }
 	        Shape linka = new Line2D.Double(x0+x1*20, y0-y1*20, x0+x2*20, y0-y2*20); // VYKRESLOVANI DODELAT
 	        stetec.setColor(Color.RED);
 	        stetec.draw(linka);
