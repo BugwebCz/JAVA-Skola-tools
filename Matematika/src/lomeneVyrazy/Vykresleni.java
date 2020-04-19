@@ -28,6 +28,7 @@ public class Vykresleni extends AnnotatedFrame {
 	public Double y2;
 	public String priklad;
 	public String priklad2;
+	public String priklad3;
 	public float x0;
 	public float y0;
 	
@@ -68,6 +69,7 @@ public class Vykresleni extends AnnotatedFrame {
 		String Vyraz = fldVyraz.getText();
 		priklad = "var " + Vyraz + " + 0.0";
 		priklad2 = priklad;
+		priklad3 = priklad;
 		
 		ScriptEngineManager manager = new ScriptEngineManager();
 		ScriptEngine engine = manager.getEngineByName("JavaScript");
@@ -82,8 +84,8 @@ public class Vykresleni extends AnnotatedFrame {
 		manager.put("x", (-7.0));
 		engine.eval(priklad);
 		y2 = (Double) engine.get("y");
-		//odsud oštření boundaries - spočítání x pro y na okraji a nahrazení -> nahradí se ale vždy!
 		
+		//odsud osetreni boundaries - spocitani x pro y na okraji a nahrazeni x novym -> zde je CHYBA
 		
 		if (y1 < (-7.0)) { 
           	manager.put("y", (-7.0));
@@ -99,12 +101,12 @@ public class Vykresleni extends AnnotatedFrame {
 		
     	if (y2 < (-7.0)) { 
           	manager.put("y", (-7.0));
-    		engine.eval(priklad2);
+    		engine.eval(priklad3);
     		x2 = (Double) engine.get("x");
     		y2 = (-7.0);
     	} else if (y2 > 7.0) {
     		manager.put("y", 7.0);
-    		engine.eval(priklad2);
+    		engine.eval(priklad3);
     		x2 = (Double) engine.get("x");
     		y2 = 7.0;
     	}
