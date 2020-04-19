@@ -12,21 +12,21 @@ public class Testovani {
 			
 		Scanner sken = new Scanner(System.in, "UTF-8");
 		String Vyraz = sken.nextLine();
-		String priklad = "var " + Vyraz;
+		String priklad = "var " + Vyraz + " + 0.0";
 		
 		ScriptEngineManager manager = new ScriptEngineManager();
 		ScriptEngine engine = manager.getEngineByName("JavaScript");
 		 
-		float x1 = 10;
-		float x2 = -10;
+		Double x1 = 10.0;
+		Double x2 = -10.0;
 		
-		manager.put("x", 10);
+		manager.put("x", 10.0);
 		engine.eval(priklad);
-		float y1 = (float) engine.get("y");
+		Double y1 = (Double) engine.get("y");
 		
-		manager.put("x", -10);
+		manager.put("x", -10.0);
 		engine.eval(priklad);
-		float y2 = (float) engine.get("y");
+		Double y2 = (Double) engine.get("y");
 		
 		System.out.println(y1 + y2);
 		
