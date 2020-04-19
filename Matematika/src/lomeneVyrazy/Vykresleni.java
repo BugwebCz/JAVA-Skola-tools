@@ -66,7 +66,7 @@ public class Vykresleni extends AnnotatedFrame {
 	public void vypocitat() throws ScriptException {
 		
 		String Vyraz = fldVyraz.getText();
-		priklad = "var " + Vyraz.replaceAll("x", "(var x)") + " + 0.0";
+		priklad = "var " + Vyraz + " + 0.0";
 		priklad2 = priklad;
 		
 		ScriptEngineManager manager = new ScriptEngineManager();
