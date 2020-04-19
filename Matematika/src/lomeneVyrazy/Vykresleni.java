@@ -22,10 +22,10 @@ import javax.utilities.gui.Window;
 
 @Window(title = "Lomené výrazy", cols = 10, rows = 9)
 public class Vykresleni extends AnnotatedFrame {
-	public float x1;
-	public float y1;
-	public float x2;
-	public float y2;
+	public Double x1;
+	public Double y1;
+	public Double x2;
+	public Double y2;
 	
 	public float x0;
 	public float y0;
@@ -70,16 +70,16 @@ public class Vykresleni extends AnnotatedFrame {
 		ScriptEngineManager manager = new ScriptEngineManager();
 		ScriptEngine engine = manager.getEngineByName("JavaScript");
 		 
-		Double x1 = 7.0;
-		Double x2 = (-7.0);
+		x1 = 7.0;
+		x2 = -7.0;
 		
 		manager.put("x", 7.0);
 		engine.eval(priklad);
-		Double y1 = (Double) engine.get("y");
+		y1 = (Double) engine.get("y");
 		
 		manager.put("x", (-7.0));
 		engine.eval(priklad);
-		Double y2 = (Double) engine.get("y");
+		y2 = (Double) engine.get("y");
 		
 		
 		repaint();
@@ -104,7 +104,7 @@ public class Vykresleni extends AnnotatedFrame {
 			y0 = 190;
 	        stetec.drawLine(450, 50, 450, 330);
 	        stetec.drawLine(310, 190, 590, 190);
-	        Shape linka = new Line2D.Float(x0+x1*20, y0-y1*20, x0+x2*20, y0-y2*20); // VYKRESLOVANI DODELAT
+	        Shape linka = new Line2D.Double(x0+x1*20, y0-y1*20, x0+x2*20, y0-y2*20); // VYKRESLOVANI DODELAT
 	        stetec.setColor(Color.RED);
 	        stetec.draw(linka);
 	    }
