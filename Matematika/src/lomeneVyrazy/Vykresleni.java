@@ -26,6 +26,10 @@ public class Vykresleni extends AnnotatedFrame {
 	public float y1;
 	public float x2;
 	public float y2;
+	
+	public float x0;
+	public float y0;
+	
 	/*Zakladni GUI*/
 	@Widget(text = "Zadej výraz:", x = 1, y = 1, cols = 2)
 	JLabel lblVyraz;
@@ -59,7 +63,7 @@ public class Vykresleni extends AnnotatedFrame {
 	
 	@OnClick("btnVykreslit")
 	public void vypocitat() throws ScriptException {
-		String Vyraz = fldVyraz.getText();
+		/*String Vyraz = fldVyraz.getText();
 		String priklad = Vyraz.substring(Vyraz.indexOf("=", 0) + 1, Vyraz.length() + 1);
 		
 		ScriptEngineManager mgr = new ScriptEngineManager();
@@ -72,25 +76,16 @@ public class Vykresleni extends AnnotatedFrame {
 		y2 = (float) y22;
 		   
 		x1 = 10;
-		x2 = -10;
+		x2 = -10;*/
 		
-		/*x1 = 40 + 450;
-		x2 = 45 + 450;
-		y1 = 30 + 190;
-		y2 = 45 + 190;*/
+		x1 = 7;
+		x2 = -7;
+		y1 = 7;
+		y2 = -7;
+		repaint();
 	}
-/*
-	public void vykreslit(Graphics g) {
-		Graphics2D stetec = (Graphics2D) g;
-		stetec.setColor(Color.RED);
-		stetec.drawLine(120, 50, 360, 50);
-	}
-	
-	public void paint(Graphics g) {
-        super.paint(g);
-        vykreslit(g);
-    }
-	*/
+
+	@Override
 	  public void paint(Graphics g) {
 		  super.paint(g);
 		  Graphics2D stetec = (Graphics2D) g;
@@ -105,9 +100,11 @@ public class Vykresleni extends AnnotatedFrame {
 			stetec.setStroke(new BasicStroke(3, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 			stetec.setColor(Color.black);
 			//X = 450, Y = 190
+			x0 = 450;
+			y0 = 190;
 	        stetec.drawLine(450, 50, 450, 330);
 	        stetec.drawLine(310, 190, 590, 190);
-	        Shape linka = new Line2D.Float(x1, y1, x2, y2); // VYKRESLOVANI DODELAT
+	        Shape linka = new Line2D.Float(x0+x1*20, y0-y1*20, x0+x2*20, y0-y2*20); // VYKRESLOVANI DODELAT
 	        stetec.setColor(Color.RED);
 	        stetec.draw(linka);
 	    }
