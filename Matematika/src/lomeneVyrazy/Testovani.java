@@ -21,7 +21,7 @@ public class Testovani {
 		Scanner sken = new Scanner(System.in, "UTF-8");
 		String Vyraz = sken.nextLine();
 		
-		String priklad = "var " + Vyraz.replaceAll("x", "(var x)") + " + 0.0";
+		String priklad = "var " + Vyraz + " + 0.0";
 		String priklad2 = priklad;
 		
 		ScriptEngineManager manager = new ScriptEngineManager();
