@@ -17,18 +17,18 @@ public class Testovani {
 		ScriptEngineManager manager = new ScriptEngineManager();
 		ScriptEngine engine = manager.getEngineByName("JavaScript");
 		 
-		Double x1 = 10.0;
-		Double x2 = -10.0;
+		Double x1 = 7.0;
+		Double x2 = (-7.0);
 		
-		manager.put("x", 10.0);
+		manager.put("x", 7.0);
 		engine.eval(priklad);
 		Double y1 = (Double) engine.get("y");
 		
-		manager.put("x", -10.0);
+		manager.put("x", (-7.0));
 		engine.eval(priklad);
 		Double y2 = (Double) engine.get("y");
 		
-		System.out.println(y1 + y2);
+		System.out.println(y1 + " " + y2);
 		
 	 
 
