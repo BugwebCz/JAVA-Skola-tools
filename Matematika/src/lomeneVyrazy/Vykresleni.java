@@ -63,25 +63,25 @@ public class Vykresleni extends AnnotatedFrame {
 	
 	@OnClick("btnVykreslit")
 	public void vypocitat() throws ScriptException {
-		/*String Vyraz = fldVyraz.getText();
-		String priklad = Vyraz.substring(Vyraz.indexOf("=", 0) + 1, Vyraz.length() + 1);
 		
-		ScriptEngineManager mgr = new ScriptEngineManager();
-		ScriptEngine engine = mgr.getEngineByName("JavaScript");
-		    
-		Object y11 = engine.eval(priklad.replaceAll("x", "10"));
-		y1 = (float) y11;
-		    
-		Object y22 = engine.eval(priklad.replaceAll("x", "-10"));
-		y2 = (float) y22;
-		   
-		x1 = 10;
-		x2 = -10;*/
+		String Vyraz = fldVyraz.getText();
+		String priklad = "var " + Vyraz + " + 0.0";
 		
-		x1 = 7;
-		x2 = -7;
-		y1 = 7;
-		y2 = -7;
+		ScriptEngineManager manager = new ScriptEngineManager();
+		ScriptEngine engine = manager.getEngineByName("JavaScript");
+		 
+		Double x1 = 10.0;
+		Double x2 = -10.0;
+		
+		manager.put("x", 10.0);
+		engine.eval(priklad);
+		Double y1 = (Double) engine.get("y");
+		
+		manager.put("x", -10.0);
+		engine.eval(priklad);
+		Double y2 = (Double) engine.get("y");
+		
+		
 		repaint();
 	}
 
