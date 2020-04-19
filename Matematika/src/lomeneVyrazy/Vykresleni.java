@@ -104,6 +104,10 @@ public class Vykresleni extends AnnotatedFrame {
 			y0 = 190;
 	        stetec.drawLine(450, 50, 450, 330);
 	        stetec.drawLine(310, 190, 590, 190);
+	        
+	        if (y1 > 330) { //když y1 > hranice dolního y -> spočítame x v tomto bodě a nahradíme x a y, dále standartně, to samé pro y2)
+	        	
+	        }
 	        Shape linka = new Line2D.Double(x0+x1*20, y0-y1*20, x0+x2*20, y0-y2*20); // VYKRESLOVANI DODELAT
 	        stetec.setColor(Color.RED);
 	        stetec.draw(linka);
