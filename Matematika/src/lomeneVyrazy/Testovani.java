@@ -22,6 +22,7 @@ public class Testovani {
 		String Vyraz = sken.nextLine();
 		
 		String priklad = "var " + Vyraz + " + 0.0";
+		String priklad2 = priklad;
 		
 		ScriptEngineManager manager = new ScriptEngineManager();
 		ScriptEngine engine = manager.getEngineByName("JavaScript");
@@ -37,25 +38,37 @@ public class Testovani {
 		engine.eval(priklad);
 		Double y2 = (Double) engine.get("y");
 		
+		System.out.println(y1 + " " + y2 + " " +  x1 + " " + x2 + " " );
+		
+		
 		if (y1 < (-7.0)) { 
-          	manager.put("y", (-7.0));
-    		engine.eval(priklad);
+          	manager.put("var y", (-7.0));
+    		engine.eval(priklad2);
     		x1 = (Double) engine.get("x");
     		y1 = (-7.0);
+    		
+    		System.out.println(y1 + " " + y2 + " " +  x1 + " " + x2 + " " );
+    		
     	} else if (y1 > 7.0) {
-    		manager.put("y", 7.0);
-    		engine.eval(priklad);
+    		manager.put("var y", 7.0);
+    		engine.eval(priklad2);
     		x1 = (Double) engine.get("x");
     		y1 = 7.0;
     	}
+		
+		System.out.println(y1 + " " + y2 + " " +  x1 + " " + x2 + " " );
+		
     	if (y2 < (-7.0)) { 
-          	manager.put("y", (-7.0));
-    		engine.eval(priklad);
+          	manager.put("var y", (-7.0));
+    		engine.eval(priklad2);
     		x2 = (Double) engine.get("x");
     		y2 = (-7.0);
+    		
+    		System.out.println(y1 + " " + y2 + " " +  x1 + " " + x2 + " " );
+    		
     	} else if (y2 > 7.0) {
-    		manager.put("y", 7.0);
-    		engine.eval(priklad);
+    		manager.put("var y", 7.0);
+    		engine.eval(priklad2);
     		x2 = (Double) engine.get("x");
     		y2 = 7.0;
     	}
