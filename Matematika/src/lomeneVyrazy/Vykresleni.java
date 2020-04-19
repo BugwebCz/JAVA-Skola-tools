@@ -27,6 +27,7 @@ public class Vykresleni extends AnnotatedFrame {
 	public Double x2;
 	public Double y2;
 	public String priklad;
+	public String priklad2;
 	public float x0;
 	public float y0;
 	
@@ -81,25 +82,28 @@ public class Vykresleni extends AnnotatedFrame {
 		engine.eval(priklad);
 		y2 = (Double) engine.get("y");
 		//odsud oštření boundaries - spočítání x pro y na okraji a nahrazení -> nahradí se ale vždy!
+		
+		
 		if (y1 < (-7.0)) { 
           	manager.put("y", (-7.0));
-    		engine.eval(priklad);
+    		engine.eval(priklad2);
     		x1 = (Double) engine.get("x");
     		y1 = (-7.0);
     	} else if (y1 > 7.0) {
     		manager.put("y", 7.0);
-    		engine.eval(priklad);
+    		engine.eval(priklad2);
     		x1 = (Double) engine.get("x");
     		y1 = 7.0;
     	}
+		
     	if (y2 < (-7.0)) { 
           	manager.put("y", (-7.0));
-    		engine.eval(priklad);
+    		engine.eval(priklad2);
     		x2 = (Double) engine.get("x");
     		y2 = (-7.0);
     	} else if (y2 > 7.0) {
     		manager.put("y", 7.0);
-    		engine.eval(priklad);
+    		engine.eval(priklad2);
     		x2 = (Double) engine.get("x");
     		y2 = 7.0;
     	}
