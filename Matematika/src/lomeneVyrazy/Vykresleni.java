@@ -84,7 +84,17 @@ public class Vykresleni extends AnnotatedFrame {
 		y2 = (Double) engine.get("y");
 				
 		if (y1 < (-7.0)) {
-			for (Double i = (-7.0); i < 7; i = i + 0.25) {
+			for (Double i = (-7.0); i < 7; i = i + 0.01) {
+				manager.put("x", i);
+	    		engine.eval(priklad);	    		
+	    		x1 = i;
+	    		y1 = (Double) engine.get("y");
+	    		if ((-7) <= y1 &&  y1 <= 7) {
+	    			break;
+	    		}
+			}
+		} else if (y1 > 7) {
+			for (Double i = 7.0; i > (-7.0); i = i - 0.01) {
 				manager.put("x", i);
 	    		engine.eval(priklad);	    		
 	    		x1 = i;
@@ -96,41 +106,26 @@ public class Vykresleni extends AnnotatedFrame {
 		}
 		
 		if (y2 < (-7.0)) {
-			for (Double i = (-7.0); i < 7; i = i + 0.25) {
+			for (Double i = (-7.0); i < 7; i = i + 0.01) {
 				manager.put("x", i);
 	    		engine.eval(priklad);	    		
 	    		x2 = i;
 	    		y2 = (Double) engine.get("y");
-	    		if ((-7) <= y1 &&  y1 <= 7) {
+	    		if ((-7) <= y2 &&  y2 <= 7) {
 	    			break;
 	    		}
 			}
-		}
-		
-		if (y1 > 7) {
-			for (Double i = 7.0; i > (-7.0); i = i - 0.25) {
-				manager.put("x", i);
-	    		engine.eval(priklad);	    		
-	    		x1 = i;
-	    		y1 = (Double) engine.get("y");
-	    		if ((-7) <= y1 &&  y1 <= 7) {
-	    			break;
-	    		}
-			}
-		}
-		
-		if (y2 > 7) {
-			for (Double i = 7.0; i > (-7.0); i = i - 0.25) {
+		} else if (y2 > 7) {
+			for (Double i = 7.0; i > (-7.0); i = i - 0.01) {
 				manager.put("x", i);
 	    		engine.eval(priklad);	    		
 	    		x2 = i;
 	    		y2 = (Double) engine.get("y");
-	    		if ((-7) <= y1 &&  y1 <= 7) {
+	    		if ((-7) <= y2 &&  y2 <= 7) {
 	    			break;
 	    		}
 			}
 		}
-		
 		
 		
 		repaint();
