@@ -68,8 +68,6 @@ public class Vykresleni extends AnnotatedFrame {
 		
 		String Vyraz = fldVyraz.getText();
 		priklad = "var " + Vyraz + " + 0.0";
-		priklad2 = priklad;
-		priklad3 = priklad;
 		
 		ScriptEngineManager manager = new ScriptEngineManager();
 		ScriptEngine engine = manager.getEngineByName("JavaScript");
@@ -84,32 +82,56 @@ public class Vykresleni extends AnnotatedFrame {
 		manager.put("x", (-7.0));
 		engine.eval(priklad);
 		y2 = (Double) engine.get("y");
+				
+		if (y1 < (-7.0)) {
+			for (Double i = (-7.0); i < 7; i = i + 0.25) {
+				manager.put("x", i);
+	    		engine.eval(priklad);	    		
+	    		x1 = i;
+	    		y1 = (Double) engine.get("y");
+	    		if ((-7) <= y1 &&  y1 <= 7) {
+	    			break;
+	    		}
+			}
+		}
 		
-		//odsud osetreni boundaries - spocitani x pro y na okraji a nahrazeni x novym -> zde je CHYBA
+		if (y2 < (-7.0)) {
+			for (Double i = (-7.0); i < 7; i = i + 0.25) {
+				manager.put("x", i);
+	    		engine.eval(priklad);	    		
+	    		x2 = i;
+	    		y2 = (Double) engine.get("y");
+	    		if ((-7) <= y1 &&  y1 <= 7) {
+	    			break;
+	    		}
+			}
+		}
 		
-		if (y1 < (-7.0)) { 
-          	manager.put("y", (-7.0));
-    		engine.eval(priklad2);
-    		x1 = (Double) engine.get("x");
-    		y1 = (-7.0);
-    	} else if (y1 > 7.0) {
-    		manager.put("y", 7.0);
-    		engine.eval(priklad2);
-    		x1 = (Double) engine.get("x");
-    		y1 = 7.0;
-    	}
+		if (y1 > 7) {
+			for (Double i = 7.0; i > (-7.0); i = i - 0.25) {
+				manager.put("x", i);
+	    		engine.eval(priklad);	    		
+	    		x1 = i;
+	    		y1 = (Double) engine.get("y");
+	    		if ((-7) <= y1 &&  y1 <= 7) {
+	    			break;
+	    		}
+			}
+		}
 		
-    	if (y2 < (-7.0)) { 
-          	manager.put("y", (-7.0));
-    		engine.eval(priklad3);
-    		x2 = (Double) engine.get("x");
-    		y2 = (-7.0);
-    	} else if (y2 > 7.0) {
-    		manager.put("y", 7.0);
-    		engine.eval(priklad3);
-    		x2 = (Double) engine.get("x");
-    		y2 = 7.0;
-    	}
+		if (y2 > 7) {
+			for (Double i = 7.0; i > (-7.0); i = i - 0.25) {
+				manager.put("x", i);
+	    		engine.eval(priklad);	    		
+	    		x2 = i;
+	    		y2 = (Double) engine.get("y");
+	    		if ((-7) <= y1 &&  y1 <= 7) {
+	    			break;
+	    		}
+			}
+		}
+		
+		
 		
 		repaint();
 	}
