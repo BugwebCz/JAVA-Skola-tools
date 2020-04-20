@@ -4,15 +4,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
-import java.awt.Stroke;
 import java.awt.geom.Line2D;
+import java.util.concurrent.TimeUnit;
 import java.awt.BasicStroke;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.utilities.gui.AnnotatedFrame;
@@ -20,6 +19,7 @@ import javax.utilities.gui.OnClick;
 import javax.utilities.gui.Widget;
 import javax.utilities.gui.Window;
 
+@SuppressWarnings("serial")
 @Window(title = "Lomené výrazy", cols = 10, rows = 9)
 public class Vykresleni extends AnnotatedFrame {
 	public Double x1;
@@ -32,6 +32,7 @@ public class Vykresleni extends AnnotatedFrame {
 	public float x0;
 	public float y0;
 	
+	public boolean vykresleno = false;
 	/*Zakladni GUI*/
 	@Widget(text = "Zadej výraz:", x = 1, y = 1, cols = 2)
 	JLabel lblVyraz;
@@ -39,7 +40,7 @@ public class Vykresleni extends AnnotatedFrame {
 	@Widget(x=3, y=1, cols=3)
 	JTextField fldVyraz;
 	
-	@Widget(text="Zadej X:", x=1, y=2, cols=2)
+	/*@Widget(text="Zadej X:", x=1, y=2, cols=2)
 	JLabel lblZadejX;
 	
 	@Widget(x=3, y=2, cols=3)
@@ -49,15 +50,19 @@ public class Vykresleni extends AnnotatedFrame {
 	JLabel lblZadejY;
 	
 	@Widget(x=3, y=3, cols=3)
-	JTextField fldY;
+	JTextField fldY;*/
 	
-	@Widget(text="Vykreslit", x=1, y=4, cols=2)
+	@Widget(text="Formát: y = x * 5 + 3", x=1, y=2, cols=3)
+	JLabel lblPopisek;
+	
+	@Widget(text="Vykreslit", x=1, y=3, cols=5)
 	JButton btnVykreslit;
 	
 	@Override
 	protected void init() {
 		// TODO Auto-generated method stub
 		super.init();
+		this.repaint();
 		//this.getContentPane().setBackground(Color.WHITE);
 	}
 	
@@ -135,6 +140,18 @@ public class Vykresleni extends AnnotatedFrame {
 	  public void paint(Graphics g) {
 		  super.paint(g);
 		  Graphics2D stetec = (Graphics2D) g;
+		  try {
+			while(!vykresleno) {
+				 TimeUnit.MICROSECONDS.sleep(5);
+				 this.repaint();
+				 vykresleno = true;
+			}
+			
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	      	for (int x = 310; x <= 570; x += 20) {
 	      		for (int y = 50; y <= 310; y += 20) {
 	            	g.setColor(Color.WHITE);
@@ -158,6 +175,7 @@ public class Vykresleni extends AnnotatedFrame {
 	  
 	public static void main(String[] args) {
 		open(Vykresleni.class);
+		
 	}
 
 }
